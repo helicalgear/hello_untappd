@@ -113,7 +113,11 @@ function getUserInfo(userName) {
         userInfo = {
             "cover_image": jsn.user.user_cover_photo,
             "avatar_image": jsn.user.user_avatar,
-            "user_name": jsn.user.user_name
+            "user_name": jsn.user.user_name,
+            "total_checkins": jsn.user.stats.total_checkins,
+            "total_beers": jsn.user.stats.total_beers,
+            "total_friends": jsn.user.stats.total_friends,
+            "total_badges": jsn.user.stats.total_badges
         }
     }, "GET", "user/info/%1".arg(userName), "");
 }
