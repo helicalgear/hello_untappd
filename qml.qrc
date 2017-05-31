@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>UntappdAPI.js</file>
+        <file>UserInfo.qml</file>
+        <file>Authorization.qml</file>
+        <file>SettingsStorage.qml</file>
+        <file>Activity.qml</file>
+        <file>UserActivity.qml</file>
+        <file>SearchBeer.qml</file>
+    </qresource>
+</RCC>
