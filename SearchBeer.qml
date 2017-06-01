@@ -49,6 +49,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        clip: true
 
         model: searchBeer
 
@@ -90,6 +91,16 @@ Item {
                     verticalAlignment: Text.AlignVCenter
                     text: beer_style
                 }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    var component = Qt.createComponent("BeerInfo.qml");
+                    var newWin = component.createObject();
+                    newWin.beerId = beer_id;
+                    newWin.show();
+                    }
             }
 
         }
