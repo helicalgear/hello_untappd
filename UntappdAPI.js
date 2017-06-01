@@ -6,16 +6,29 @@
 function getCheckinRecent() {
     var parameter = "";
     getData(function(jsn) {
+        var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++){
-            var item = jsn.checkins.items[n];
             var data = {
-                'user_name': item.user.user_name,
-                'user_avatar': item.user.user_avatar,
-                'beer_name': item.beer.beer_name,
-                'beer_label': item.beer.beer_label,
-                'beer_style': item.beer.beer_style,
-                'brewery_name': item.brewery.brewery_name,
-                'media': item.media.items[0].photo.photo_img_md
+                "checkin_id": items[n].checkin_id,
+                "created_at": items[n].created_at,
+                "checkin_comment": items[n].checkin_comment,
+                "user_name": items[n].user.user_name,
+                "first_name": items[n].user.first_name,
+                "last_name": items[n].user.last_name,
+                "user_avatar": items[n].user.user_avatar,
+                "beer_id": items[n].beer.bid,
+                "beer_name": items[n].beer.beer_name,
+                "beer_label": items[n].beer.beer_label,
+                "beer_style": items[n].beer.beer_style,
+                "wish_list": items[n].beer.wish_list,
+                "brewery_id": items[n].brewery.brewery_id,
+                "brewery_name": items[n].brewery.brewery_name,
+                "brewery_label": items[n].brewery.brewery_label,
+                "country_name": items[n].brewery.country_name,
+                "venue_id": items[n].venue.venue_id,
+                "venue_name": items[n].venue.venue_name,
+                "venue_icon": items[n].venue.venue_icon,
+                "photo": items[n].media.items[0].photo.photo_img_md
             };
             checkinRecent.append(data);
         }
