@@ -8,5 +8,6 @@
         <file>Activity.qml</file>
         <file>UserActivity.qml</file>
         <file>SearchBeer.qml</file>
+        <file>BeerInfo.qml</file>
     </qresource>
 </RCC>

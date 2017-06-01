@@ -233,8 +233,8 @@ function getBeerInfo(beerId) {
             "beer_ibu": jsn.beer.beer_ibu,
             "beer_description": jsn.beer.beer_description,
             "beer_style": jsn.beer.beer_style,
-            "brewery_name": jsn.brewery.brewery_name,
-            "brewery_label": jsn.brewery.brewery_label
+            "brewery_name": jsn.beer.brewery.brewery_name,
+            "brewery_label": jsn.beer.brewery.brewery_label
         }
     }, "GET", "beer/info/%1".arg(beerId), "");
 }
@@ -253,10 +253,11 @@ function getSearchBeer(words, param) {
         for (var n=0; n<jsn.beers.count; n++) {
             var data = {
                 "beer_name": items[n].beer.beer_name,
-                "beer_id": items[n].beer.beer_id,
+                "beer_id": items[n].beer.bid,
                 "beer_label": items[n].beer.beer_label,
                 "beer_style": items[n].beer.beer_style,
-                "brewery_name": items[n].brewery.brewery_name
+                "brewery_name": items[n].brewery.brewery_name,
+                "brewery_label": items[n].brewery.brewery_label
             }
             searchBeer.append(data);
         }
