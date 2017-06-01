@@ -5,8 +5,8 @@ import "./UntappdAPI.js" as Untappd
 Item {
 
     property var userInfo: { "user_name": "",
-                             "cover_image": "",
-                             "avatar_image": "",
+                             "user_cover_photo": "",
+                             "user_avatar": "",
                              "total_checkins": "",
                              "total_beers": "",
                              "total_friends": "",
@@ -18,11 +18,11 @@ Item {
         Image {
             width: parent.width
             fillMode: Image.PreserveAspectFit
-            source: userInfo.cover_image
+            source: userInfo.user_cover_photo
             Column {
                 anchors.centerIn: parent
                 Image {
-                    source: userInfo.avatar_image
+                    source: userInfo.user_avatar
                 }
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -38,20 +38,20 @@ Item {
             height: parent.width / 4
                 Rectangle {
                     width: parent.width / 4
-                    height: parent.width / 4
+                    height: parent.width / 8
                     border.width: 2
                     radius: 5
                     Column {
                         anchors.fill: parent
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height / 5
+                            height: parent.height / 4
                             verticalAlignment: Text.AlignVCenter
                             text: "Checkins"
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height * 4 / 5
+                            height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
                             text: userInfo.total_checkins
@@ -60,20 +60,20 @@ Item {
                 }
                 Rectangle {
                     width: parent.width / 4
-                    height: parent.width / 4
+                    height: parent.width / 8
                     border.width: 2
                     radius: 5
                     Column {
                         anchors.fill: parent
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height / 5
+                            height: parent.height / 4
                             verticalAlignment: Text.AlignVCenter
                             text: "Original"
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height * 4 / 5
+                            height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
                             text: userInfo.total_beers
@@ -82,20 +82,20 @@ Item {
                 }
                 Rectangle {
                     width: parent.width / 4
-                    height: parent.width / 4
+                    height: parent.width / 8
                     border.width: 2
                     radius: 5
                     Column {
                         anchors.fill: parent
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height / 5
+                            height: parent.height / 4
                             verticalAlignment: Text.AlignVCenter
                             text: "Friends"
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height * 4 / 5
+                            height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
                             text: userInfo.total_friends
@@ -104,20 +104,20 @@ Item {
                 }
                 Rectangle {
                     width: parent.width / 4
-                    height: parent.width / 4
+                    height: parent.width / 8
                     border.width: 2
                     radius: 5
                     Column {
                         anchors.fill: parent
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height / 5
+                            height: parent.height / 4
                             verticalAlignment: Text.AlignVCenter
                             text: "Badges"
                         }
                         Text {
                             anchors.horizontalCenter: parent.horizontalCenter
-                            height: parent.height * 4 / 5
+                            height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
                             text: userInfo.total_badges

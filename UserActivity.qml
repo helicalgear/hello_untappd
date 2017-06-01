@@ -56,18 +56,70 @@ Item {
         model: userCheckins
 
         delegate: Rectangle {
+            id: checkinView
             width: parent.width
-            height: parent.width / 2
+            height: parent.width / 3
 
             Image {
                 anchors.fill: parent
-                source: media
-                Image {
+                source: photo
+                Rectangle {
+                    width: parent.width - 20
+                    height: avatar.height + 20
                     anchors.top: parent.top
                     anchors.topMargin: 10
                     anchors.left: parent.left
                     anchors.leftMargin: 10
-                    source: user_avatar
+                    radius: 5
+                    color: "#77000000"
+                    Image {
+                        id: avatar
+                        width: checkinView.height / 3
+                        height: checkinView.height / 3
+                        anchors.top: parent.top
+                        anchors.topMargin: 10
+                        anchors.left: parent.left
+                        anchors.leftMargin: 10
+                        source: user_avatar
+                    }
+                    Text {
+                        id: userName
+                        anchors.top: parent.top
+                        anchors.topMargin: 10
+                        anchors.left: avatar.right
+                        anchors.leftMargin: 10
+                        color: "#FFFFFF"
+                        font.pixelSize: 16
+                        text: user_name
+                    }
+                    Text {
+                        anchors.top: userName.bottom
+                        anchors.topMargin: 10
+                        anchors.left: avatar.right
+                        anchors.leftMargin: 10
+                        color: "#FFFFFF"
+                        font.pixelSize: 12
+                        text: checkin_comment
+                    }
+                    Text {
+                        id: createdAt
+                        anchors.top: parent.top
+                        anchors.topMargin: 10
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        color: "#FFFFFF"
+                        font.pixelSize: 12
+                        text: Qt.formatDateTime(new Date(created_at))
+                    }
+                    Text {
+                        anchors.top: createdAt.bottom
+                        anchors.topMargin: 10
+                        anchors.right: parent.right
+                        anchors.rightMargin: 10
+                        color: "#FFFFFF"
+                        font.pixelSize: 12
+                        text: venue_name ? venue_name : ''
+                    }
                 }
             }
 
@@ -96,19 +148,19 @@ Item {
                     anchors.right: parent.right
                     Text {
                         height: parent.height / 3
-                        font.pixelSize: 24
+                        font.pixelSize: 20
                         verticalAlignment: Text.AlignVCenter
                         text: beer_name
                     }
                     Text {
                         height: parent.height / 3
-                        font.pixelSize: 18
+                        font.pixelSize: 16
                         verticalAlignment: Text.AlignVCenter
                         text: brewery_name
                     }
                     Text {
                         height: parent.height / 3
-                        font.pixelSize: 18
+                        font.pixelSize: 16
                         verticalAlignment: Text.AlignVCenter
                         text: beer_style
                     }
