@@ -32,7 +32,7 @@ function getCheckinRecent() {
             };
             checkinRecent.append(data);
         }
-    }, "checkin/recent", "");
+    }, "GET", "checkin/recent", "");
 }
 
 // User Activity Feed
@@ -64,7 +64,7 @@ function getUserCheckins(userName) {
             };
             userCheckins.append(data);
         }
-    }, "user/checkins/%1".arg(userName), "");
+    }, "GET", "user/checkins/%1".arg(userName), "");
 }
 
 // The Pub
@@ -76,10 +76,11 @@ function getThepubLocal(param) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
             var data = {
+                // add the properties which are needed from apps.
             }
             thepubLocal.append(data);
         }
-    }, "thepub/local", "%1".arg(parameters));
+    }, "GET", "thepub/local", "%1".arg(parameters));
 }
 
 // Venue Activity Feed
@@ -88,10 +89,11 @@ function getVenueCheckins(venueId) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
             var data = {
+                // add the properties which are needed from apps.
             }
             venueCheckins.append(data);
         }
-    }, "venue/checkins/%1".arg(venueId), "");
+    }, "GET", "venue/checkins/%1".arg(venueId), "");
 }
 
 // Beer Activity Feed
@@ -100,10 +102,11 @@ function getBeerCheckins(beerId) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
             var data = {
+                // add the properties which are needed from apps.
             }
             beerCheckins.append(data);
         }
-    }, "beer/checkins/%1".arg(beerId), "");
+    }, "GET", "beer/checkins/%1".arg(beerId), "");
 }
 
 // Brewery Activity Feed
@@ -112,16 +115,17 @@ function getBreweryCheckins(breweryId) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
             var data = {
+                // add the properties which are needed from apps.
             }
             breweryCheckins.append(data);
         }
-    }, "brewery/checkins/%1".arg(breweryId), "");
+    }, "GET", "brewery/checkins/%1".arg(breweryId), "");
 }
 
 //Notifications
 function getNotifications() {
     getData(function(jsn) {
-        var news_items = jsn.news.items;
+//        var news_items = jsn.news.items;
         var notifications_items = jsn.notifications.items;
 //        for (var n=0; n<jsn.checkins.count; n++){
 //            var item = jsn.checkins.items[n];
@@ -129,7 +133,7 @@ function getNotifications() {
 //            };
 //            listModel.append(data);
 //        }
-    }, "notifications", "");
+    }, "GET", "notifications", "");
 }
 
 // _Info_
@@ -149,7 +153,7 @@ function getUserInfo(userName) {
             "total_friends": jsn.user.stats.total_friends,
             "total_badges": jsn.user.stats.total_badges
         }
-    }, "user/info/%1".arg(userName), "");
+    }, "GET", "user/info/%1".arg(userName), "");
 }
 
 // User With List
@@ -165,7 +169,7 @@ function getUserWishlist(userName) {
             }
             userWishlist.append(data);
         }
-    }, "user/wishlist/%1".arg(userName), "");
+    }, "GET", "user/wishlist/%1".arg(userName), "");
 }
 
 // User Friends
@@ -180,7 +184,7 @@ function getUserFriends(userName) {
             }
             userFriends.append(data);
         }
-    }, "user/friends/%1".arg(userName), "");
+    }, "GET", "user/friends/%1".arg(userName), "");
 }
 
 // User Badges
@@ -195,7 +199,7 @@ function getUserBadges(userName) {
             }
             userBadges.append(data);
         }
-    }, "user/badges/%1".arg(userName), "");
+    }, "GET", "user/badges/%1".arg(userName), "");
 }
 
 // User Beers
@@ -210,7 +214,7 @@ function getUserBeers(userName) {
             }
             userBeers.append(data);
         }
-    }, "user/beers/%1".arg(userName), "");
+    }, "GET", "user/beers/%1".arg(userName), "");
 }
 
 // Brewery Info
@@ -220,7 +224,7 @@ function getBreweryInfo(breweryId) {
             "brewery_name": jsn.brewery.brewery_name,
             "brewery_label": jsn.brewery.brewery_label
         }
-    }, "brewery/info/%1".arg(breweryId), "");
+    }, "GET", "brewery/info/%1".arg(breweryId), "");
 }
 
 // Beer Info
@@ -236,13 +240,13 @@ function getBeerInfo(beerId) {
             "brewery_name": jsn.beer.brewery.brewery_name,
             "brewery_label": jsn.beer.brewery.brewery_label
         }
-    }, "beer/info/%1".arg(beerId), "");
+    }, "GET", "beer/info/%1".arg(beerId), "");
 }
 
 // Venue Info
 function getVenueInfo(venueId) {
     getData(function(jsn) {
-    }, "brewery/info/%1".arg(breweryId), "");
+    }, "GET", "brewery/info/%1".arg(breweryId), "");
 }
 
 // _Search_
@@ -261,7 +265,7 @@ function getSearchBeer(words, param) {
             }
             searchBeer.append(data);
         }
-    }, "search/beer", "q=%1&".arg(words));
+    }, "GET", "search/beer", "q=%1&".arg(words));
 }
 
 // Search Brewery
@@ -276,83 +280,95 @@ function getSearchBrewery(words, param) {
             }
             searchBrewery.append(data);
         }
-    }, "search/brewery", "q=%1&".arg(words));
+    }, "GET", "search/brewery", "q=%1&".arg(words));
 }
 
 // _Actions_
 // Checkin
 function postCheckinAdd(param) {
     var parameters = "";
-    parameters += "gmt_offset=%1&".arg(param.offset);
-    parameters += "timezone=%1&".arg(param.timezone);
-    parameters += "bid=%1&".arg(param.bid);
-    postData(function(jsn) {
-
-        console.log(jsn.response.result);
-    }, "checkin/add", parameters);
+    parameters += "gmt_offset=%1".arg(param.offset);
+    parameters += "&timezone=%1".arg(param.timezone);
+    parameters += "&bid=%1".arg(param.bid);
+    parameters += "&facebook=%1".arg(param.facebook);
+    parameters += "&twitter=%1".arg(param.twitter);
+    parameters += "&foursqare=%1".arg(param.foursqare);
+    if (param.foursquare === "on") { parameters += "&foursquare_id=%1".arg(param.foursquare_id) }
+    if (param.rating !== 0) { parameters += "&rating=%1".arg(param.rating) }
+    //
+    getData(function(jsn) {
+        console.log(jsn.result);
+    }, "POST", "checkin/add", parameters);
 }
 
 // Toast / Untoast
 function postCheckinToast(checkinId) {
-    postData(function(jsn) {
+    getData(function(jsn) {
         likeType = jsn.like_type;
-    }, "checkin/toast/%1".arg(checkinId), "");
+    }, "POST", "checkin/toast/%1".arg(checkinId), "");
 }
 
 // Pending Friends
 function getUserPending() {
     getData(function(jsn) {
-    }, "user/pending", "");
+        // add the properties which are needed from apps.
+    }, "GET", "user/pending", "");
 }
 
 // Request(Add) Friend
 function getFriendRequest(targetId) {
     getData(function(jsn) {
-    }, "friend/request/%1".arg(targetId), "");
+        // add the properties which are needed from apps.
+    }, "GET", "friend/request/%1".arg(targetId), "");
 }
 
 // Remove Friend
 function getFriendRemove(targetId) {
     getData(function(jsn) {
-    }, "friend/remove/%1".arg(targetId), "");
+        // add the properties which are needed from apps.
+    }, "GET", "friend/remove/%1".arg(targetId), "");
 }
 
 // Accept Friend
 function getFriendAccept(targetId) {
     getData(function(jsn) {
-    }, "friend/accept/%1".arg(targetId), "");
+        // add the properties which are needed from apps.
+    }, "GET", "friend/accept/%1".arg(targetId), "");
 }
 
 // Reject Friend
 function getFriendReject(targetId) {
     getData(function(jsn) {
-    }, "friend/reject/%1".arg(targetId), "");
+        // add the properties which are needed from apps.
+    }, "GET", "friend/reject/%1".arg(targetId), "");
 }
 
 // Add Comment
 function postcheckinAddcomment(checkinId, comment) {
     postData(function(jsn) {
-    }, "checkin/addcomment/%1".arg(checkinId), "%1&".arg(comment));
+        postResult = jsn.result;
+    }, "GET", "checkin/addcomment/%1".arg(checkinId), "comment=%1".arg(comment).replace(/%20/, '+'));
 }
 
 // Remove Comment
 function postcheckinDeletecomment(commentId) {
     postData(function(jsn) {
-    }, "checkin/deletecomment/%1".arg(commentId), "");
+        postResult = jsn.result;
+    }, "GET", "checkin/deletecomment/%1".arg(commentId), "");
 }
 
 // Add to Wish List
 function getUserWishlistAdd(beerId) {
     getData(function(jsn) {
-        apiStatus = jsn.result;
-    }, "user/wishlist/add", "%1&".arg(targetId));
+        postResult = jsn.result;
+    }, "GET", "user/wishlist/add", "%1&".arg(targetId));
 }
 
 // Remove from Wish List
 function getUserWishlistDelete(beerId) {
     getData(function(jsn) {
-        apiStatus = jsn.result;
-    }, "user/wishlist/delete", "%1&".arg(targetId));
+        postResult = jsn.result;
+    }, "GET", "user/wishlist/delete", "%1&".arg(targetId));
 }
 
 // Foursqaure Lookup
@@ -368,15 +384,17 @@ function getVenueFoursquare_lookup(venueId) {
             }
             listModel.append(data);
         }
-    }, "venue/foursquare_lookup/%1".arg(venueId), "");
+    }, "GET", "venue/foursquare_lookup/%1".arg(venueId), "");
 }
 
 // Access to API
-function getData(callback, endpoint, parameters) {
+function getData(callback, method, endpoint, parameters) {
     var xhr = new XMLHttpRequest;
-    var url = "https://api.untappd.com/v4/%1?%2access_token=%3".arg(endpoint).arg(parameters).arg(settings.readData('AccessToken', ''));
-    console.log(url);
+    var param_get = (method = "GET") ? parameters : "";
+    var param_post = (method = "POST") ? parameters : "";
+    var url = "https://api.untappd.com/v4/%1?%2access_token=%3".arg(endpoint).arg(param_get).arg(settings.readData('AccessToken', ''));
     xhr.open("GET", url, true);
+    if (method === "POST") { xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' ); }
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             var jsn = JSON.parse(xhr.responseText);
@@ -390,29 +408,5 @@ function getData(callback, endpoint, parameters) {
             }
         }
     }
-    xhr.send();
-}
-
-function postData(callback, endpoint, parameters) {
-    var xhr = new XMLHttpRequest;
-    var url = "https://api.untappd.com/v4/%1?access_token=%2".arg(endpoint).arg(settings.readData('AccessToken', ''));
-    var snt = "%1".arg(parameters);
-    console.log(url);
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var jsn = JSON.parse(xhr.responseText);
-            switch (xhr.status) {
-            case 200:
-                callback(jsn.response);
-                break;
-            default:
-                console.log(jsn.meta.error_detail);
-                break;
-            }
-        }
-    }
-    xhr.send(snt);
-    console.log(snt);
+    xhr.send(param_post);
 }

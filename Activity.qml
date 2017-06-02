@@ -36,7 +36,7 @@ Item {
         delegate: Rectangle {
             id: checkinView
             width: parent.width
-            height: parent.width / 3
+            height: parent.width / 3 + (checks.visible ? checks.height : 0)
 
             Image {
                 anchors.fill: parent
@@ -52,8 +52,8 @@ Item {
                     color: "#77000000"
                     Image {
                         id: avatar
-                        width: checkinView.height / 3
-                        height: checkinView.height / 3
+                        width: ( checkinView.height - (checks.visible ? checks.height : 0) ) / 3
+                        height: ( checkinView.height - (checks.visible ? checks.height : 0) ) / 3
                         anchors.top: parent.top
                         anchors.topMargin: 10
                         anchors.left: parent.left
@@ -102,10 +102,11 @@ Item {
             }
 
             Rectangle {
+                id: beerInfo
                 width: parent.width - 20
-                height: ( parent.height / 2 ) - 20
+                height: ( ( parent.height - (checks.visible ? checks.height : 0) ) / 2 ) - 20
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: 10
+                anchors.bottomMargin: 10 + (checks.visible ? checks.height : 0)
                 anchors.horizontalCenter: parent.horizontalCenter
                 border.width: 2
                 radius: 5
@@ -143,6 +144,21 @@ Item {
                         text: beer_style
                     }
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: checks.visible = !checks.visible
+                }
+            }
+
+            Rectangle {
+                id: checks
+                width: parent.width - 20
+                height: 100
+                anchors.top: beerInfo.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                border.width: 2
+                radius: 5
+                visible: false
             }
         }
     }
