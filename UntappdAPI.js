@@ -393,7 +393,7 @@ function getData(callback, method, endpoint, parameters) {
     var param_get = (method = "GET") ? parameters : "";
     var param_post = (method = "POST") ? parameters : "";
     var url = "https://api.untappd.com/v4/%1?%2access_token=%3".arg(endpoint).arg(param_get).arg(settings.readData('AccessToken', ''));
-    xhr.open("GET", url, true);
+    xhr.open(method, url, true);
     if (method === "POST") { xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' ); }
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
