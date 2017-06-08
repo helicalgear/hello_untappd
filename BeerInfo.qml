@@ -16,8 +16,10 @@ ApplicationWindow {
         "beer_ibu": "",
         "beer_description": "",
         "beer_style": "",
-        "brewery_name": "",
-        "brewery_label": ""
+        "brewery": {
+            "brewery_name": "",
+            "brewery_label": ""
+        }
     }
     property var checkInParam: { "bid": beerId,
                                  "offset": "+9",
@@ -55,6 +57,9 @@ ApplicationWindow {
         Text {
             text: beerInfo.beer_name
         }
+        Text {
+            text: beerInfo.brewery.brewery_name
+        }
 
         Button {
             text: "Position"
@@ -62,6 +67,7 @@ ApplicationWindow {
         }
         Button {
             text: "Twitter"
+            visible: settings.readData("twitter", "") !== ""
             onClicked: {
                 switch (checkInParam.twitter) {
                 case "on":
@@ -77,6 +83,7 @@ ApplicationWindow {
         }
         Button {
             text: "Facebook"
+            visible: settings.readData("facebook", "") !== ""
             onClicked: {
                 switch (checkInParam.facebook) {
                 case "on":
@@ -95,7 +102,7 @@ ApplicationWindow {
                 id: rating
                 maximumValue: 5.0
                 stepSize: 0.25
-                value: 2.5
+                value: defined(beerInfo.auth_rating) ? beerInfo.auth_rating : 0.0
             }
             Text {
                 text: rating.value

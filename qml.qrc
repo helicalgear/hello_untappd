@@ -9,5 +9,6 @@
         <file>UserActivity.qml</file>
         <file>SearchBeer.qml</file>
         <file>BeerInfo.qml</file>
+        <file>ThepubLocal.qml</file>
     </qresource>
 </RCC>

@@ -66,7 +66,7 @@ Item {
                 anchors.topMargin: 10
                 anchors.left: parent.left
                 anchors.leftMargin: 10
-                source: beer_label
+                source: beer.beer_label
             }
             Column {
                 width: parent.width - parent.height
@@ -77,19 +77,19 @@ Item {
                     height: parent.height / 3
                     font.pixelSize: 24
                     verticalAlignment: Text.AlignVCenter
-                    text: beer_name
+                    text: beer.beer_name
                 }
                 Text {
                     height: parent.height / 3
                     font.pixelSize: 18
                     verticalAlignment: Text.AlignVCenter
-                    text: brewery_name
+                    text: brewery.brewery_name
                 }
                 Text {
                     height: parent.height / 3
                     font.pixelSize: 18
                     verticalAlignment: Text.AlignVCenter
-                    text: beer_style
+                    text: beer.beer_style
                 }
             }
 
@@ -98,7 +98,7 @@ Item {
                 onClicked: {
                     var component = Qt.createComponent("BeerInfo.qml");
                     var newWin = component.createObject();
-                    newWin.beerId = beer_id;
+                    newWin.beerId = beer.bid;
                     newWin.show();
                     }
             }

@@ -7,10 +7,14 @@ Item {
     property var userInfo: { "user_name": "",
                              "user_cover_photo": "",
                              "user_avatar": "",
-                             "total_checkins": "",
-                             "total_beers": "",
-                             "total_friends": "",
-                             "total_badges": "" }
+                             "stats": { "total_checkins": "",
+                                        "total_beers": "",
+                                        "total_friends": "",
+                                        "total_badges": "" },
+                             "contact": { "foursquare": "",
+                                          "twitter": "",
+                                          "facebook": "" }
+                             }
 
     Column {
         anchors.fill: parent
@@ -54,7 +58,7 @@ Item {
                             height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
-                            text: userInfo.total_checkins
+                            text: userInfo.stats.total_checkins
                         }
                     }
                 }
@@ -76,7 +80,7 @@ Item {
                             height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
-                            text: userInfo.total_beers
+                            text: userInfo.stats.total_beers
                         }
                     }
                 }
@@ -98,7 +102,7 @@ Item {
                             height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
-                            text: userInfo.total_friends
+                            text: userInfo.stats.total_friends
                         }
                     }
                 }
@@ -120,10 +124,34 @@ Item {
                             height: parent.height * 3 / 4
                             verticalAlignment: Text.AlignVCenter
                             font.pixelSize: parent.height * 2 / 5
-                            text: userInfo.total_badges
+                            text: userInfo.stats.total_badges
                         }
                     }
                 }
+        }
+        Text {
+            text: defined(userInfo.contact.foursquare) ? userInfo.contact.foursquare : ""
+            onTextChanged: {
+                if ( text !== settings.readData("foursquare", "") ) {
+                    settings.saveData("foursquare", userInfo.contact.foursquare)
+                }
+            }
+        }
+        Text {
+            text: defined(userInfo.contact.twitter) ? userInfo.contact.twitter : ""
+            onTextChanged: {
+                if ( text !== settings.readData("twitter", "") ) {
+                    settings.saveData("twitter", userInfo.contact.twitter)
+                }
+            }
+        }
+        Text {
+            text: defined(userInfo.contact.facebook) ? userInfo.contact.facebook : ""
+            onTextChanged: {
+                if ( text !== settings.readData("facebook", "") ) {
+                    settings.saveData("facebook", userInfo.contact.facebook)
+                }
+            }
         }
     }
 

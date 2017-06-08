@@ -6,9 +6,6 @@ Item {
 
     ListModel {
         id: userCheckins
-        // user_name
-        // beer_name
-        // brewry_name
     }
 
     Rectangle {
@@ -63,7 +60,7 @@ Item {
 
             Image {
                 anchors.fill: parent
-                source: photo
+                source: media.count > 0 ? media.items[0].photo.photo_img_md : ""
                 Rectangle {
                     width: parent.width - 20
                     height: avatar.height + 20
@@ -81,20 +78,20 @@ Item {
                         anchors.topMargin: 10
                         anchors.left: parent.left
                         anchors.leftMargin: 10
-                        source: user_avatar
+                        source: user.user_avatar
                     }
                     Text {
-                        id: userName
+                        id: username
                         anchors.top: parent.top
                         anchors.topMargin: 10
                         anchors.left: avatar.right
                         anchors.leftMargin: 10
                         color: "#FFFFFF"
                         font.pixelSize: 16
-                        text: user_name
+                        text: user.user_name
                     }
                     Text {
-                        anchors.top: userName.bottom
+                        anchors.top: username.bottom
                         anchors.topMargin: 10
                         anchors.left: avatar.right
                         anchors.leftMargin: 10
@@ -119,7 +116,7 @@ Item {
                         anchors.rightMargin: 10
                         color: "#FFFFFF"
                         font.pixelSize: 12
-                        text: venue_name ? venue_name : ''
+                        text: defined(venue.venue_name) ? venue.venue_name : ''
                     }
                 }
             }
@@ -140,7 +137,7 @@ Item {
                     anchors.topMargin: 10
                     anchors.left: parent.left
                     anchors.leftMargin: 10
-                    source: beer_label
+                    source: beer.beer_label
                 }
                 Column {
                     width: parent.width - parent.height
@@ -151,19 +148,19 @@ Item {
                         height: parent.height / 3
                         font.pixelSize: 20
                         verticalAlignment: Text.AlignVCenter
-                        text: beer_name
+                        text: beer.beer_name
                     }
                     Text {
                         height: parent.height / 3
                         font.pixelSize: 16
                         verticalAlignment: Text.AlignVCenter
-                        text: brewery_name
+                        text: brewery.brewery_name
                     }
                     Text {
                         height: parent.height / 3
                         font.pixelSize: 16
                         verticalAlignment: Text.AlignVCenter
-                        text: beer_style
+                        text: beer.beer_style
                     }
                 }
             }

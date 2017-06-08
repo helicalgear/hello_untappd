@@ -12,23 +12,16 @@ function getCheckinRecent() {
                 "checkin_id": items[n].checkin_id,
                 "created_at": items[n].created_at,
                 "checkin_comment": items[n].checkin_comment,
-                "user_name": items[n].user.user_name,
-                "first_name": items[n].user.first_name,
-                "last_name": items[n].user.last_name,
-                "user_avatar": items[n].user.user_avatar,
-                "beer_id": items[n].beer.bid,
-                "beer_name": items[n].beer.beer_name,
-                "beer_label": items[n].beer.beer_label,
-                "beer_style": items[n].beer.beer_style,
-                "wish_list": items[n].beer.wish_list,
-                "brewery_id": items[n].brewery.brewery_id,
-                "brewery_name": items[n].brewery.brewery_name,
-                "brewery_label": items[n].brewery.brewery_label,
-                "country_name": items[n].brewery.country_name,
-                "venue_id": items[n].venue.venue_id,
-                "venue_name": items[n].venue.venue_name,
-                "venue_icon": items[n].venue.venue_icon,
-                "photo": (items[n].media.count > 0) ? items[n].media.items[0].photo.photo_img_md : ""
+                "rating_score": items[n].rating_score,
+                "user": items[n].user,
+                "beer": items[n].beer,
+                "brewery": items[n].brewery,
+                "venue": Object.keys(items[n].venue).length === 0 ? {} : items[n].venue,
+                "comments": items[n].comments,
+                "toasts": items[n].toasts,
+                "media": items[n].media,
+                "source": items[n].source,
+                "badges": items[n].badges
             };
             checkinRecent.append(data);
         }
@@ -44,23 +37,16 @@ function getUserCheckins(userName) {
                 "checkin_id": items[n].checkin_id,
                 "created_at": items[n].created_at,
                 "checkin_comment": items[n].checkin_comment,
-                "user_name": items[n].user.user_name,
-                "first_name": items[n].user.first_name,
-                "last_name": items[n].user.last_name,
-                "user_avatar": items[n].user.user_avatar,
-                "beer_id": items[n].beer.bid,
-                "beer_name": items[n].beer.beer_name,
-                "beer_label": items[n].beer.beer_label,
-                "beer_style": items[n].beer.beer_style,
-                "wish_list": items[n].beer.wish_list,
-                "brewery_id": items[n].brewery.brewery_id,
-                "brewery_name": items[n].brewery.brewery_name,
-                "brewery_label": items[n].brewery.brewery_label,
-                "country_name": items[n].brewery.country_name,
-                "venue_id": items[n].venue.venue_id,
-                "venue_name": items[n].venue.venue_name,
-                "venue_icon": items[n].venue.venue_icon,
-                "photo": (items[n].media.count > 0) ? items[n].media.items[0].photo.photo_img_md : ""
+                "rating_score": items[n].rating_score,
+                "user": items[n].user,
+                "beer": items[n].beer,
+                "brewery": items[n].brewery,
+                "venue": Object.keys(items[n].venue).length === 0 ? {} : items[n].venue,
+                "comments": items[n].comments,
+                "toasts": items[n].toasts,
+                "media": items[n].media,
+                "source": items[n].source,
+                "badges": items[n].badges
             };
             userCheckins.append(data);
         }
@@ -75,10 +61,11 @@ function getThepubLocal(param) {
     getData(function(jsn) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
-            var data = {
-                // add the properties which are needed from apps.
-            }
-            thepubLocal.append(data);
+//            var data = {
+//                // add the properties which are needed from apps.
+//            }
+//            thepubLocal.append(data);
+            thepubLocal.append(items[n]);
         }
     }, "GET", "thepub/local", "%1".arg(parameters));
 }
@@ -88,10 +75,10 @@ function getVenueCheckins(venueId) {
     getData(function(jsn) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
-            var data = {
-                // add the properties which are needed from apps.
-            }
-            venueCheckins.append(data);
+//            var data = {
+//                // add the properties which are needed from apps.
+//            }
+            venueCheckins.append(items[n]);
         }
     }, "GET", "venue/checkins/%1".arg(venueId), "");
 }
@@ -102,7 +89,19 @@ function getBeerCheckins(beerId) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
             var data = {
-                // add the properties which are needed from apps.
+                "checkin_id": items[n].checkin_id,
+                "created_at": items[n].created_at,
+                "checkin_comment": items[n].checkin_comment,
+                "rating_score": items[n].rating_score,
+                "user": items[n].user,
+                "beer": items[n].beer,
+                "brewery": items[n].brewery,
+                "venue": Object.keys(items[n].venue).length === 0 ? {} : items[n].venue,
+                "comments": items[n].comments,
+                "toasts": items[n].toasts,
+                "media": items[n].media,
+                "source": items[n].source,
+                "badges": items[n].badges
             }
             beerCheckins.append(data);
         }
@@ -114,10 +113,19 @@ function getBreweryCheckins(breweryId) {
     getData(function(jsn) {
         var items = jsn.checkins.items;
         for (var n=0; n<jsn.checkins.count; n++) {
-            var data = {
-                // add the properties which are needed from apps.
-            }
-            breweryCheckins.append(data);
+            "checkin_id": items[n].checkin_id,
+            "created_at": items[n].created_at,
+            "checkin_comment": items[n].checkin_comment,
+            "rating_score": items[n].rating_score,
+            "user": items[n].user,
+            "beer": items[n].beer,
+            "brewery": items[n].brewery,
+            "venue": Object.keys(items[n].venue).length === 0 ? {} : items[n].venue,
+            "comments": items[n].comments,
+            "toasts": items[n].toasts,
+            "media": items[n].media,
+            "source": items[n].source,
+            "badges": items[n].badges
         }
     }, "GET", "brewery/checkins/%1".arg(breweryId), "");
 }
@@ -140,19 +148,20 @@ function getNotifications() {
 // User Info
 function getUserInfo(userName) {
     getData(function(jsn) {
-        userInfo = {
-            "user_name": jsn.user.user_name,
-            "first_name": jsn.user.first_name,
-            "last_name": jsn.user.last_name,
-            "user_avatar": jsn.user.user_avatar,
-            "user_cover_photo": jsn.user.user_cover_photo,
-            "location": jsn.user.location,
-            "bio": jsn.user.bio,
-            "total_checkins": jsn.user.stats.total_checkins,
-            "total_beers": jsn.user.stats.total_beers,
-            "total_friends": jsn.user.stats.total_friends,
-            "total_badges": jsn.user.stats.total_badges
-        }
+        userInfo = jsn.user;
+//        userInfo = {
+//            "user_name": jsn.user.user_name,
+//            "first_name": jsn.user.first_name,
+//            "last_name": jsn.user.last_name,
+//            "user_avatar": jsn.user.user_avatar,
+//            "user_cover_photo": jsn.user.user_cover_photo,
+//            "location": jsn.user.location,
+//            "bio": jsn.user.bio,
+//            "total_checkins": jsn.user.stats.total_checkins,
+//            "total_beers": jsn.user.stats.total_beers,
+//            "total_friends": jsn.user.stats.total_friends,
+//            "total_badges": jsn.user.stats.total_badges
+//        }
     }, "GET", "user/info/%1".arg(userName), "");
 }
 
@@ -230,16 +239,17 @@ function getBreweryInfo(breweryId) {
 // Beer Info
 function getBeerInfo(beerId) {
     getData(function(jsn) {
-        beerInfo = {
-            "beer_name": jsn.beer.beer_name,
-            "beer_label": jsn.beer.beer_label,
-            "beer_abv": jsn.beer.beer_abv,
-            "beer_ibu": jsn.beer.beer_ibu,
-            "beer_description": jsn.beer.beer_description,
-            "beer_style": jsn.beer.beer_style,
-            "brewery_name": jsn.beer.brewery.brewery_name,
-            "brewery_label": jsn.beer.brewery.brewery_label
-        }
+        beerInfo = jsn.beer
+//        beerInfo = {
+//            "beer_name": jsn.beer.beer_name,
+//            "beer_label": jsn.beer.beer_label,
+//            "beer_abv": jsn.beer.beer_abv,
+//            "beer_ibu": jsn.beer.beer_ibu,
+//            "beer_description": jsn.beer.beer_description,
+//            "beer_style": jsn.beer.beer_style,
+//            "brewery_name": jsn.beer.brewery.brewery_name,
+//            "brewery_label": jsn.beer.brewery.brewery_label
+//        }
     }, "GET", "beer/info/%1".arg(beerId), "");
 }
 
@@ -255,15 +265,15 @@ function getSearchBeer(words, param) {
     getData(function(jsn) {
         var items = jsn.beers.items;
         for (var n=0; n<jsn.beers.count; n++) {
-            var data = {
-                "beer_name": items[n].beer.beer_name,
-                "beer_id": items[n].beer.bid,
-                "beer_label": items[n].beer.beer_label,
-                "beer_style": items[n].beer.beer_style,
-                "brewery_name": items[n].brewery.brewery_name,
-                "brewery_label": items[n].brewery.brewery_label
-            }
-            searchBeer.append(data);
+//            var data = {
+//                "beer_name": items[n].beer.beer_name,
+//                "beer_id": items[n].beer.bid,
+//                "beer_label": items[n].beer.beer_label,
+//                "beer_style": items[n].beer.beer_style,
+//                "brewery_name": items[n].brewery.brewery_name,
+//                "brewery_label": items[n].brewery.brewery_label
+//            }
+            searchBeer.append(items[n]);
         }
     }, "GET", "search/beer", "q=%1&".arg(words));
 }
@@ -393,6 +403,7 @@ function getData(callback, method, endpoint, parameters) {
     var param_get = (method = "GET") ? parameters : "";
     var param_post = (method = "POST") ? parameters : "";
     var url = "https://api.untappd.com/v4/%1?%2access_token=%3".arg(endpoint).arg(param_get).arg(settings.readData('AccessToken', ''));
+    console.log(url)
     xhr.open(method, url, true);
     if (method === "POST") { xhr.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' ); }
     xhr.onreadystatechange = function () {
@@ -401,8 +412,10 @@ function getData(callback, method, endpoint, parameters) {
             switch (xhr.status) {
             case 200:
                 callback(jsn.response);
+                console.log(jsn.meta.code);
                 break;
             default:
+                console.log(jsn.meta.code);
                 console.log(jsn.meta.error_detail);
                 break;
             }

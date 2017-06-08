@@ -8,6 +8,8 @@ ApplicationWindow {
     height: 640
     title: qsTr("Hello Untappd")
 
+    function defined(obj) { return typeof obj !== 'undefined'}
+
     SettingsStorage {
         id: settings
         identifier: 'Untappd'
@@ -22,6 +24,7 @@ ApplicationWindow {
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
         Tab { title: "Search Beer" ; SearchBeer {} }
+        Tab { title: "The Pub"; ThepubLocal {} }
     }
 
 }
