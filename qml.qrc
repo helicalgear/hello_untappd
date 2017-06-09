@@ -10,5 +10,6 @@
         <file>SearchBeer.qml</file>
         <file>BeerInfo.qml</file>
         <file>ThepubLocal.qml</file>
+        <file>Notification.qml</file>
     </qresource>
 </RCC>

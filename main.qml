@@ -24,7 +24,7 @@ ApplicationWindow {
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
         Tab { title: "Search Beer" ; SearchBeer {} }
-        Tab { title: "The Pub"; ThepubLocal {} }
+        Tab { title: "The Pub"; Notification {} }
     }
 
 }

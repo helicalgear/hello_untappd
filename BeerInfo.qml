@@ -22,8 +22,6 @@ ApplicationWindow {
         }
     }
     property var checkInParam: { "bid": beerId,
-                                 "offset": "+9",
-                                 "timezone": "JST",
                                  "foursquare_id": "",
                                  "geolat": null,
                                  "geolng": null,
