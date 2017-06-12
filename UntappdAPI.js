@@ -172,11 +172,7 @@ function getSearchBrewery(words, param) {
 // _Actions_
 // Checkin
 function postCheckinAdd(param) {
-    var date = new Date();
-    var tzOffset = -(date.getTimezoneOffset() / 60);
-    var timeZone = date.toLocaleTimeString().match(/\(.*\)$/);
-    console.log(timeZone);
-    var parameters = "gmt_offset=%1&timezone=%2".arg(tzOffset).arg("JST");
+    var parameters = "gmt_offset=%1&timezone=%2".arg(tzOffset).arg(timeZone);
     parameters += "&bid=%1".arg(param.bid);
     parameters += "&facebook=%1".arg(param.facebook);
     parameters += "&twitter=%1".arg(param.twitter);
