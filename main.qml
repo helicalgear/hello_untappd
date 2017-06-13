@@ -8,7 +8,7 @@ ApplicationWindow {
     height: 640
     title: qsTr("Hello Untappd")
 
-    // Common Component
+    // Common Components
     SettingsStorage {
         id: settings
         identifier: 'Untappd'
@@ -27,6 +27,7 @@ ApplicationWindow {
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
+        Tab { title: "Search Beer" ; SearchBeer {} }
         Tab { title: "The Pub"; ThepubLocal {} }
     }
 

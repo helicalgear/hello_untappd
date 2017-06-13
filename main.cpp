@@ -22,7 +22,6 @@ int main(int argc, char *argv[])
     } else {
         engine.rootContext()->setContextProperty("distPref", "m");
     }
-
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
     return app.exec();
