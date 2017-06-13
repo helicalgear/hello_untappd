@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
+import "./UntappdAPI.js" as Untappd
 
 ApplicationWindow {
     id: root
@@ -7,6 +8,21 @@ ApplicationWindow {
     width: 480
     height: 640
     title: qsTr("Hello Untappd")
+
+    // Authentication
+    Timer {
+        running: settings.readData('AccessToken', "") === ""
+        interval: 100
+        onTriggered: {
+            var component = Qt.createComponent("Auth.qml");
+            var authWin = component.createObject();
+            authWin.show();
+            authWin.codeChanged.connect(function() {
+                Untappd.getAccessToken(authWin.code);
+            })
+            mainView.update();
+        }
+    }
 
     // Common Components
     SettingsStorage {
@@ -18,11 +34,10 @@ ApplicationWindow {
     //　Common Functions
     function defined(obj) { return typeof obj !== 'undefined'}
 
-    // Main Window Component
+    // Main Window Components
     TabView {
         id: mainView
         anchors.fill: parent
-//        Tab { title: "Authorization" ; Authorization {} }
         Tab { title: "Search Beer" ; SearchBeer {} }
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }

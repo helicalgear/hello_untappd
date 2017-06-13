@@ -25,8 +25,16 @@ Item {
             source: userInfo.user_cover_photo
             Column {
                 anchors.centerIn: parent
-                Image {
-                    source: userInfo.user_avatar
+                Rectangle {
+                    width: 128
+                    height: 128
+                    radius: 64
+                    clip: true
+                    Image {
+                        anchors.fill: parent
+                        clip: true
+                        source: userInfo.user_avatar
+                    }
                 }
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
