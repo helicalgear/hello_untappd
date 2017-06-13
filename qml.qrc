@@ -11,5 +11,6 @@
         <file>BeerInfo.qml</file>
         <file>ThepubLocal.qml</file>
         <file>Notification.qml</file>
+        <file>Auth.qml</file>
     </qresource>
 </RCC>

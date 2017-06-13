@@ -4,6 +4,19 @@ import "./UntappdAPI.js" as Untappd
 
 Item {
 
+    Timer {
+        running: settings.readData('AccessToken', "") === ""
+        interval: 100
+        onTriggered: {
+            var component = Qt.createComponent("Auth.qml");
+            var authWin = component.createObject();
+            authWin.show();
+            authWin.codeChanged.connect(function() {
+                Untappd.getAccessToken(authWin.code);
+            })
+        }
+    }
+
     ListModel {
         id: searchBeer
     }

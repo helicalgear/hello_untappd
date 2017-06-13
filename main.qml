@@ -8,23 +8,26 @@ ApplicationWindow {
     height: 640
     title: qsTr("Hello Untappd")
 
-    function defined(obj) { return typeof obj !== 'undefined'}
-
+    // Common Component
     SettingsStorage {
         id: settings
         identifier: 'Untappd'
         description: 'https://helicalgear.blogspot.jp/'
     }
 
+    //　Common Functions
+    function defined(obj) { return typeof obj !== 'undefined'}
+
+    // Main Window Component
     TabView {
         id: mainView
         anchors.fill: parent
-        Tab { title: "Authorization" ; Authorization {} }
+//        Tab { title: "Authorization" ; Authorization {} }
+        Tab { title: "Search Beer" ; SearchBeer {} }
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
-        Tab { title: "Search Beer" ; SearchBeer {} }
-        Tab { title: "The Pub"; Notification {} }
+        Tab { title: "The Pub"; ThepubLocal {} }
     }
 
 }

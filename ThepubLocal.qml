@@ -4,8 +4,9 @@ import "./UntappdAPI.js" as Untappd
 
 Item {
 
-    property var thePub: { "lat": 35.6894072,
-                           "lng": 139.6981171 }
+    property var thePub: { "lat": 35.705252,
+                           "lng": 139.6637752,
+                           "radius": 1 }
 
     ListModel {
         id: thepubLocal
@@ -17,7 +18,7 @@ Item {
         model: thepubLocal
 
         delegate: Text {
-            text: venue.venue_name
+            text: "%1: %2".arg(venue.venue_id).arg(venue.venue_name)
         }
     }
 

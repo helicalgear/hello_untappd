@@ -30,10 +30,16 @@ function getThepubLocal(param) {
     var parameters = "";
     parameters += "lat=%1&".arg(param.lat);
     parameters += "lng=%1&".arg(param.lng);
+    if (param.radius !== undefined) { parameters += "radius=%1&".arg(param.radius); }
+    parameters += "dist_pref=%1&".arg(distPref);
     getData(function(jsn) {
         var items = jsn.checkins.items;
+        var venue_list = [];
         for (var n=0; n<jsn.checkins.count; n++) {
-            thepubLocal.append(items[n]);
+            if ( venue_list.indexOf(items[n].venue.venue_id) === -1 ) {
+                thepubLocal.append(items[n]);
+                venue_list.push(items[n].venue.venue_id);
+            }
         }
     }, "GET", "thepub/local", "%1".arg(parameters));
 }
@@ -172,11 +178,7 @@ function getSearchBrewery(words, param) {
 // _Actions_
 // Checkin
 function postCheckinAdd(param) {
-    var date = new Date();
-    var tzOffset = -(date.getTimezoneOffset() / 60);
-    var timeZone = date.toLocaleTimeString().match(/\(.*\)$/);
-    console.log(timeZone);
-    var parameters = "gmt_offset=%1&timezone=%2".arg(tzOffset).arg("JST");
+    var parameters = "gmt_offset=%1&timezone=%2".arg(tzOffset).arg(timeZone);
     parameters += "&bid=%1".arg(param.bid);
     parameters += "&facebook=%1".arg(param.facebook);
     parameters += "&twitter=%1".arg(param.twitter);
@@ -294,4 +296,31 @@ function getData(callback, method, endpoint, parameters) {
         }
     }
     xhr.send(param_post);
+}
+
+// OAuth
+function getAccessToken(code) {
+    var xhr = new XMLHttpRequest;
+    var url = "https://untappd.com/oauth/authorize/?client_id=%1&client_secret=%2&response_type=code&redirect_url=%3&code=%4".arg(clientId).arg(clientSecret).arg(redirectUrl).arg(code);
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            switch (xhr.status) {
+            case 200:
+                var jsn = JSON.parse(xhr.responseText);
+                settings.saveData('AccessToken', jsn.response.access_token);
+                getData(function(user_info) {
+                    settings.saveData('foursquare', user_info.user.contact.foursquare);
+                    settings.saveData('twitter', user_info.user.contact.twitter);
+                    settings.saveData('facebook', user_info.user.contact.facebook);
+                }, "GET", "user/info/", "");
+                break;
+            case 401:
+                break;
+            default:
+                break;
+            }
+        }
+    }
+    xhr.send();
 }
