@@ -22,5 +22,6 @@
         <file>Models/VenueCheckinsModel.qml</file>
         <file>Models/WishListModel.qml</file>
         <file>Utils/UntappdAPI.js</file>
+        <file>Models/UserInfo.qml</file>
     </qresource>
 </RCC>

@@ -1,21 +1,13 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./Utils/UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
-    property var userInfo: { "user_name": "",
-                             "user_cover_photo": "",
-                             "user_avatar": "",
-                             "stats": { "total_checkins": "",
-                                        "total_beers": "",
-                                        "total_friends": "",
-                                        "total_badges": "" },
-                             "contact": { "foursquare": "",
-                                          "twitter": "",
-                                          "facebook": "" }
-                             }
-    property string user_name: ""
+    UserInfo {
+        id: userInfo
+        user_name: ""
+    }
 
     Column {
         anchors.fill: parent
@@ -164,12 +156,5 @@ Item {
         }
     }
 
-    Component.onCompleted: Untappd.getUserInfo(function(user_info) {
-        userInfo = user_info;
-        if ( user_name === "" ) {
-            if (settings.readData("foursquare", "") !== userInfo.contact.foursquare) { settings.saveData("foursquare", userInfo.contact.foursquare); }
-            if (settings.readData("twitter", "") !== userInfo.contact.twitter) { settings.saveData("twitter", userInfo.contact.twitter); }
-            if (settings.readData("facebook", "") !== userInfo.contact.facebook) { settings.saveData("facebook", userInfo.contact.facebook); }
-        }
-    }, user_name);
+    Component.onCompleted: userInfo.load()
 }
