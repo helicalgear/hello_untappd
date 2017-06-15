@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Utils/UntappdAPI.js" as Untappd
 
 ApplicationWindow {
     id: root
@@ -32,7 +32,7 @@ ApplicationWindow {
     }
 
     //　Common Functions
-    function defined(obj) { return typeof obj !== 'undefined'}
+    function defined(obj) { return typeof obj !== 'undefined' }
 
     // Main Window Components
     TabView {
@@ -42,7 +42,6 @@ ApplicationWindow {
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
-        Tab { title: "Search Beer" ; SearchBeer {} }
         Tab { title: "The Pub"; ThepubLocal {} }
     }
 

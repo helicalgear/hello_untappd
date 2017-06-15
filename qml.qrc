@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>UntappdAPI.js</file>
         <file>UserInfo.qml</file>
         <file>SettingsStorage.qml</file>
         <file>Activity.qml</file>
@@ -11,5 +10,17 @@
         <file>ThepubLocal.qml</file>
         <file>Notification.qml</file>
         <file>Auth.qml</file>
+        <file>main.cpp</file>
+        <file>Models/BeerCheckinsModel.qml</file>
+        <file>Models/BreweryCheckinsModel.qml</file>
+        <file>Models/CheckinRecentModel.qml</file>
+        <file>Models/NotificationModel.qml</file>
+        <file>Models/SearchBeerModel.qml</file>
+        <file>Models/SearchBreweryModel.qml</file>
+        <file>Models/ThepubLocalModel.qml</file>
+        <file>Models/UserCheckinsModel.qml</file>
+        <file>Models/VenueCheckinsModel.qml</file>
+        <file>Models/WishListModel.qml</file>
+        <file>Utils/UntappdAPI.js</file>
     </qresource>
 </RCC>

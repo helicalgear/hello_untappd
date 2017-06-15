@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Utils/UntappdAPI.js" as Untappd
 
 Item {
 
@@ -15,6 +15,7 @@ Item {
                                           "twitter": "",
                                           "facebook": "" }
                              }
+    property string user_name: ""
 
     Column {
         anchors.fill: parent
@@ -163,5 +164,12 @@ Item {
         }
     }
 
-    Component.onCompleted: Untappd.getUserInfo("");
+    Component.onCompleted: Untappd.getUserInfo(function(user_info) {
+        userInfo = user_info;
+        if ( user_name === "" ) {
+            if (settings.readData("foursquare", "") !== userInfo.contact.foursquare) { settings.saveData("foursquare", userInfo.contact.foursquare); }
+            if (settings.readData("twitter", "") !== userInfo.contact.twitter) { settings.saveData("twitter", userInfo.contact.twitter); }
+            if (settings.readData("facebook", "") !== userInfo.contact.facebook) { settings.saveData("facebook", userInfo.contact.facebook); }
+        }
+    }, user_name);
 }

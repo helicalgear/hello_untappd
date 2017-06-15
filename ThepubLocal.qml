@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
@@ -8,7 +8,7 @@ Item {
                            "lng": 139.6637752,
                            "radius": 1 }
 
-    ListModel {
+    ThepubLocalModel {
         id: thepubLocal
     }
 
@@ -22,5 +22,5 @@ Item {
         }
     }
 
-    Component.onCompleted: Untappd.getThepubLocal(thePub)
+    Component.onCompleted: thepubLocal.load(thePub.lat, thePub.lng)
 }

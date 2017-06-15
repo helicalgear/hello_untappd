@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
-    ListModel {
-        id: userCheckins
-    }
+    UserCheckinsModel { id: userCheckins }
 
     Rectangle {
         id: inputBar
@@ -38,8 +36,7 @@ Item {
             height: 20
             text: "View"
             onClicked: {
-                userCheckins.clear();
-                Untappd.getUserCheckins(userName.text);
+                userCheckins.load(userName.text)
             }
         }
     }

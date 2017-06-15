@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
-    ListModel {
-        id: checkinRecent
-    }
+    CheckinRecentModel { id: checkinRecent }
 
     ListView {
         anchors.fill: parent
@@ -143,5 +141,5 @@ Item {
         }
     }
 
-    Component.onCompleted: Untappd.getCheckinRecent(checkinRecent)
+    Component.onCompleted: checkinRecent.load()
 }

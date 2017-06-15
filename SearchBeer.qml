@@ -1,12 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
-    ListModel {
-        id: searchBeer
-    }
+    SearchBeerModel { id: searchBeer }
 
     Rectangle {
         id: inputBar
@@ -38,8 +36,7 @@ Item {
             height: 20
             text: "Search!"
             onClicked: {
-                searchBeer.clear();
-                Untappd.getSearchBeer(srchwrds.text, {});
+                searchBeer.load(srchwrds.text);
             }
         }
     }
