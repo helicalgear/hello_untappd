@@ -36,7 +36,8 @@ Item {
             height: 20
             text: "View"
             onClicked: {
-                userCheckins.load(userName.text)
+                userCheckins.user_name = userName.text
+                userCheckins.loadCheckins()
             }
         }
     }

@@ -6,7 +6,7 @@ Item {
 
     property var thePub: { "lat": 35.705252,
                            "lng": 139.6637752,
-                           "radius": 1 }
+                           "radius": 5 }
 
     ThepubLocalModel {
         id: thepubLocal
@@ -17,10 +17,28 @@ Item {
 
         model: thepubLocal
 
-        delegate: Text {
-            text: "%1: %2".arg(venue.venue_id).arg(venue.venue_name)
+        delegate: Rectangle {
+            width: parent.width
+            height: 64
+            Row {
+                anchors.fill: parent
+                Image {
+                    width: parent.height
+                    height: parent.height
+                    source: venue.venue_label ? venue.venue_label : ""
+                }
+                Text {
+                    text: "%1: %2".arg(venue.venue_id).arg(venue.venue_name)
+                }
+            }
+
         }
     }
 
-    Component.onCompleted: thepubLocal.load(thePub.lat, thePub.lng)
+    Component.onCompleted: {
+        thepubLocal.lat = thePub.lat
+        thepubLocal.lng = thePub.lng
+        thepubLocal.radius = thePub.radius
+        thepubLocal.loadCheckins()
+    }
 }

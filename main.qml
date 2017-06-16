@@ -39,6 +39,7 @@ ApplicationWindow {
         id: mainView
         anchors.fill: parent
         Tab { title: "Search Beer" ; SearchBeer {} }
+        Tab { title: "Search Brewery" ; SearchBrewery {} }
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }

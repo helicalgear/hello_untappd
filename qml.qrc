@@ -22,6 +22,12 @@
         <file>Models/VenueCheckinsModel.qml</file>
         <file>Models/WishListModel.qml</file>
         <file>Utils/UntappdAPI.js</file>
-        <file>Models/UserInfo.qml</file>
+        <file>Models/AbstractCheckinsModel.qml</file>
+        <file>Models/AbstractSearchModel.qml</file>
+        <file>Models/AbstractInfoModel.qml</file>
+        <file>Models/BeerInfoModel.qml</file>
+        <file>Models/UserInfoModel.qml</file>
+        <file>Views/CheckinsListView.qml</file>
+        <file>SearchBrewery.qml</file>
     </qresource>
 </RCC>

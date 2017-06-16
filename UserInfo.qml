@@ -4,7 +4,7 @@ import "./Models"
 
 Item {
 
-    UserInfo {
+    UserInfoModel {
         id: userInfo
         user_name: ""
     }
@@ -14,7 +14,7 @@ Item {
 
         Image {
             width: parent.width
-            fillMode: Image.PreserveAspectFit
+            fillMode: Image.PreserveAspectCrop
             source: userInfo.user_cover_photo
             Column {
                 anchors.centerIn: parent
@@ -26,6 +26,7 @@ Item {
                     Image {
                         anchors.fill: parent
                         clip: true
+                        fillMode: Image.PreserveAspectCrop
                         source: userInfo.user_avatar
                     }
                 }

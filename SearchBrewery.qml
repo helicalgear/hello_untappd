@@ -4,7 +4,7 @@ import "./Models"
 
 Item {
 
-    SearchBeerModel { id: searchBeer }
+    SearchBreweryModel { id: searchBrewery }
 
     Rectangle {
         id: inputBar
@@ -36,8 +36,8 @@ Item {
             height: 20
             text: "Search!"
             onClicked: {
-                searchBeer.q = srchwrds.text
-                searchBeer.search();
+                searchBrewery.q = srchwrds.text
+                searchBrewery.search();
             }
         }
     }
@@ -49,7 +49,7 @@ Item {
         anchors.bottom: parent.bottom
         clip: true
 
-        model: searchBeer
+        model: searchBrewery
 
         delegate: Rectangle {
             width: parent.width
@@ -64,7 +64,7 @@ Item {
                 anchors.topMargin: 10
                 anchors.left: parent.left
                 anchors.leftMargin: 10
-                source: beer.beer_label
+                source: brewery.brewery_label
             }
             Column {
                 width: parent.width - parent.height
@@ -75,19 +75,19 @@ Item {
                     height: parent.height / 3
                     font.pixelSize: 24
                     verticalAlignment: Text.AlignVCenter
-                    text: beer.beer_name
-                }
-                Text {
-                    height: parent.height / 3
-                    font.pixelSize: 18
-                    verticalAlignment: Text.AlignVCenter
                     text: brewery.brewery_name
                 }
                 Text {
                     height: parent.height / 3
                     font.pixelSize: 18
                     verticalAlignment: Text.AlignVCenter
-                    text: beer.beer_style
+                    text: brewery.country_name
+                }
+                Text {
+                    height: parent.height / 3
+                    font.pixelSize: 18
+                    verticalAlignment: Text.AlignVCenter
+                    text: brewery.beer_count
                 }
             }
 

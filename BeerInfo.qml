@@ -1,7 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 1.4
 import QtPositioning 5.3
-import "./Utils/UntappdAPI.js" as Untappd
+import "./Models"
 
 ApplicationWindow {
     id: root
@@ -9,7 +9,11 @@ ApplicationWindow {
     height: 360
 
     property string beerId
-    property var beerInfo
+
+    BeerInfoModel {
+        id: beerInfo
+    }
+
     property var checkInParam: { "bid": beerId,
                                  "foursquare_id": "",
                                  "geolat": null,
@@ -102,6 +106,7 @@ ApplicationWindow {
     }
 
     onBeerIdChanged: {
-        if (beerId !== "") { Untappd.getBeerInfo(function(beer_info){ beerInfo = beer_info }, beerId); }
+        beerInfo.bid = beerId;
+        beerInfo.load();
     }
 }

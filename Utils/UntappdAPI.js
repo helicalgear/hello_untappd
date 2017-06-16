@@ -4,17 +4,11 @@
 // _Feeds_
 // Activity Feed
 function getCheckinRecent(callback) {
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 50, default is 25
     accessAPI( function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "checkin/recent", "");
 }
 
 // User Activity Feed
 function getUserCheckins(callback, user_name) {
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 50, default is 25
     accessAPI( function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "user/checkins/%1".arg(user_name), "" );
 }
 
@@ -22,33 +16,21 @@ function getUserCheckins(callback, user_name) {
 function getThepubLocal(callback, param) {
     var parameters = "lat=%1&lng=%2&".arg(param.lat).arg(param.lng);
     parameters += "radius=%1&dist_pref=%2&".arg(param.radius).arg(param.dist_pref);
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 25, default is 25
     accessAPI(function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "thepub/local", "%1".arg(parameters));
 }
 
 // Venue Activity Feed
 function getVenueCheckins(callback, venue_id) {
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 25, default is 25
     accessAPI(function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "venue/checkins/%1".arg(venue_id), "");
 }
 
 // Beer Activity Feed
 function getBeerCheckins(callback, bid) {
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 25, default is 25
     accessAPI(function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "beer/checkins/%1".arg(bid), "");
 }
 
 // Brewery Activity Feed
 function getBreweryCheckins(callback, brewery_id) {
-    // max_id (int, optional) - The checkin ID that you want the results to start with
-    // min_id (int, optional) - Returns only checkins that are newer than this value
-    // limit (int, optional) - The number of results to return, max of 25, default is 25
     accessAPI(function(jsn) { callback( jsn.checkins.count, jsn.checkins.items ); }, "GET", "brewery/checkins/%1".arg(brewery_id), "");
 }
 
@@ -71,8 +53,6 @@ function getUserInfo(callback, user_name) {
 
 // User With List
 function getUserWishlist(callback, user_name) {
-    // offset (int, optional) - The numeric offset that you what results to start
-    // limit (int, optional) - The number of results to return, max of 50, default is 25
     // sort (string, optional) - You can sort the results using these values:
     //                           date - sorts by date (default),
     //                           checkin - sorted by highest checkin,
@@ -149,8 +129,6 @@ function getVenueInfo(venueId) {
 // _Search_
 // Search Beer
 function getSearchBeer(callback, query) {
-    // offset (int, optional) - The numeric offset that you what results to start
-    // limit (int, optional) - The number of results to return, max of 50, default is 25
     // sort (string, optional) - Your can sort the results using these values:
     //                           checkin - sorts by checkin count (default),
     //                           name - sorted by alphabetic beer name
@@ -159,9 +137,7 @@ function getSearchBeer(callback, query) {
 
 // Search Brewery
 function getSearchBrewery(callback, query) {
-    // offset (int, optional) - The numeric offset that you what results to start
-    // limit (int, optional) - The number of results to return, max of 50, default is 25
-    accessAPI(function(jsn) { callback(jsn.found, jsn.brewery); }, "GET", "search/brewery", "q=%1&".arg(words));
+    accessAPI(function(jsn) { callback(jsn.brewery.count, jsn.brewery); }, "GET", "search/brewery", "q=%1&".arg(words));
 }
 
 // _Actions_
@@ -230,14 +206,14 @@ function getFriendReject(targetId) {
 }
 
 // Add Comment
-function postcheckinAddcomment(checkinId, comment) {
+function postCheckinAddcomment(checkinId, comment) {
     accessAPI(function(jsn) {
         postResult = jsn.result;
     }, "POST", "checkin/addcomment/%1".arg(checkinId), "comment=%1".arg(comment).replace(/%20/, '+'));
 }
 
 // Remove Comment
-function postcheckinDeletecomment(commentId) {
+function postCheckinDeletecomment(commentId) {
     accessAPI(function(jsn) {
         postResult = jsn.result;
     }, "POST", "checkin/deletecomment/%1".arg(commentId), "");

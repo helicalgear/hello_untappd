@@ -141,5 +141,5 @@ Item {
         }
     }
 
-    Component.onCompleted: checkinRecent.load()
+    Component.onCompleted: checkinRecent.loadCheckins()
 }

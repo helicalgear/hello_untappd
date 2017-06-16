@@ -1,7 +1,10 @@
 import QtQuick 2.0
 import "../Utils/UntappdAPI.js" as Untappd
 
-Item {
+AbstractInfoModel {
+    endpoint: "user/info/%1".arg(user_name)
+    target: "user"
+
     property string user_name: ""
     property string user_cover_photo: ""
     property string user_avatar: ""
@@ -13,13 +16,11 @@ Item {
                             "twitter": "",
                             "facebook": "" }
 
-    function load() {
-        Untappd.getUserInfo(function(user_info) {
-            user_name = user_info.user_name;
-            user_cover_photo = user_info.user_cover_photo;
-            user_avatar = user_info.user_avatar;
-            stats = user_info.stats;
-            contact = user_info.contact
-        }, user_name)
+    onInfoChanged: {
+        user_name = info.user_name;
+        user_cover_photo = info.user_cover_photo;
+        user_avatar = info.user_avatar;
+        stats = info.stats;
+        contact = info.contact;
     }
 }
