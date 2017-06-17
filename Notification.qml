@@ -1,15 +1,17 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.4
-import "./UntappdAPI.js" as Untappd
+import "./Models"
 
 Item {
 
-    ListModel {
+    NotificationModel {
         id: notifications
+        notif_type: "notifications"
     }
 
-    ListModel {
+    NotificationModel {
         id: news
+        notif_type: "news"
     }
 
     Rectangle {
@@ -58,6 +60,6 @@ Item {
         }
     }
 
-    Component.onCompleted: Untappd.getNotifications("news")
+    Component.onCompleted: notifications.load()
 
 }

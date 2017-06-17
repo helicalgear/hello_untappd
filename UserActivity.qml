@@ -37,7 +37,7 @@ Item {
             text: "View"
             onClicked: {
                 userCheckins.user_name = userName.text
-                userCheckins.loadCheckins()
+                userCheckins.load()
             }
         }
     }

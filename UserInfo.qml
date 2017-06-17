@@ -157,5 +157,4 @@ Item {
         }
     }
 
-    Component.onCompleted: userInfo.load()
 }

@@ -39,6 +39,6 @@ Item {
         thepubLocal.lat = thePub.lat
         thepubLocal.lng = thePub.lng
         thepubLocal.radius = thePub.radius
-        thepubLocal.loadCheckins()
+        thepubLocal.load()
     }
 }

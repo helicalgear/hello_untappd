@@ -11,7 +11,7 @@ ListModel {
     property int min_id: 0
     property int limit: 25
 
-    function loadCheckins() {
+    function load() {
         loading = true;
         clear();
         Untappd.accessAPI( function(jsn) {

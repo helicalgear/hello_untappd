@@ -140,6 +140,4 @@ Item {
             }
         }
     }
-
-    Component.onCompleted: checkinRecent.loadCheckins()
 }

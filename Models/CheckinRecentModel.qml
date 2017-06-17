@@ -7,4 +7,5 @@ AbstractCheckinsModel {
     // min_id (int, optional) - Returns only checkins that are newer than this value
     // limit (int, optional) - The number of results to return, max of 50, default is 25
 
+    Component.onCompleted: load()
 }
