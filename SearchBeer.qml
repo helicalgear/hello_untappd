@@ -24,6 +24,7 @@ Item {
             width: parent.width - srchbtn.width - 20
             height: 20
             verticalAlignment: Text.AlignVCenter
+            onTextChanged: searchBeer.q = text
         }
 
         Button {
@@ -36,7 +37,7 @@ Item {
             height: 20
             text: "Search!"
             onClicked: {
-                searchBeer.q = srchwrds.text
+//                searchBeer.q = srchwrds.text
                 searchBeer.search();
             }
         }

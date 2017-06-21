@@ -14,13 +14,17 @@ ListModel {
     function load() {
         loading = true;
         clear();
-        Untappd.accessAPI( function(jsn) {
-            var items = jsn.checkins.items;
-            for (var n=0; n<jsn.checkins.count; n++) {
-                if (Object.keys(items[n].venue).length === 0) { items[n].venue = {}; }
-                append(items[n]);
+        Untappd.accessAPI( function(result, response, notifications) {
+            if ( result ) {
+                var items = response.checkins.items;
+                for (var n = 0; n < response.checkins.count; n++) {
+                    if (Object.keys(items[n].venue).length === 0) { items[n].venue = {}; }
+                    append(items[n]);
+                }
+            } else {
+                console.log ("%1: %2".arg(response.code).arg(response.error_detail));
             }
             loading = false;
-        }, "GET", endpoint, parameters)
+        }, "GET", endpoint, parameters);
     }
 }

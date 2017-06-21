@@ -6,7 +6,7 @@ Item {
 
     UserInfoModel {
         id: userInfo
-        user_name: ""
+        user_name: settings.readData("user_name", "")
     }
 
     Column {
@@ -134,24 +134,24 @@ Item {
         Text {
             text: defined(userInfo.contact.foursquare) ? userInfo.contact.foursquare : ""
             onTextChanged: {
-                if ( text !== settings.readData("foursquare", "") ) {
-                    settings.saveData("foursquare", userInfo.contact.foursquare)
+                if ( defined(userInfo.contact.foursquare) ^ settings.readData("foursquare", false) ) {
+                    settings.saveData("foursquare", defined(userInfo.contact.foursquare))
                 }
             }
         }
         Text {
             text: defined(userInfo.contact.twitter) ? userInfo.contact.twitter : ""
             onTextChanged: {
-                if ( text !== settings.readData("twitter", "") ) {
-                    settings.saveData("twitter", userInfo.contact.twitter)
+                if ( defined(userInfo.contact.twitter) ^ settings.readData("twitter", false) ) {
+                    settings.saveData("twitter", defined(userInfo.contact.twitter))
                 }
             }
         }
         Text {
             text: defined(userInfo.contact.facebook) ? userInfo.contact.facebook : ""
             onTextChanged: {
-                if ( text !== settings.readData("facebook", "") ) {
-                    settings.saveData("facebook", userInfo.contact.facebook)
+                if ( defined(userInfo.contact.facebook) ^ settings.readData("facebook", false) ) {
+                    settings.saveData("facebook", defined(userInfo.contact.facebook))
                 }
             }
         }

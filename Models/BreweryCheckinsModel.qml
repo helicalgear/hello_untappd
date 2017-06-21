@@ -8,4 +8,6 @@ AbstractCheckinsModel {
     // limit (int, optional) - The number of results to return, max of 25, default is 25
     property string brewery_id: ""
 
+    onEndpointChanged: if ( brewery_id !== "" ) load()
+
 }

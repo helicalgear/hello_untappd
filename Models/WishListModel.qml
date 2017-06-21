@@ -16,4 +16,6 @@ AbstractSearchModel {
                                     //              lowest_abv - lowest ABV from the wishlist
     property string user_name: ""
 
+    onEndpointChanged: if ( user_name !== "" ) search()
+
 }

@@ -15,12 +15,16 @@ ListModel {
     function search() {
         loading = true;
         clear();
-        Untappd.accessAPI( function(jsn) {
-            var items = jsn[target].items;
-            for (var n=0; n<jsn[target].count; n++) {
-                append(items[n]);
+        Untappd.accessAPI( function(result, response, notifications) {
+            if ( result ) {
+                var items = response[target].items;
+                for (var n=0; n<response[target].count; n++) {
+                    append(items[n]);
+                }
+            } else {
+                console.log("%1: %2".arg(response.code).arg(response.error_detail));
             }
             loading = false;
-        }, "GET", endpoint, parameters)
+        }, "GET", endpoint, parameters);
     }
 }

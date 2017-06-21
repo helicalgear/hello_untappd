@@ -24,6 +24,9 @@ ApplicationWindow {
         }
     }
 
+    // Common Properties
+    property bool debug: true
+
     // Common Components
     SettingsStorage {
         id: settings
@@ -34,6 +37,9 @@ ApplicationWindow {
     //　Common Functions
     function defined(obj) { return typeof obj !== 'undefined' }
 
+    //
+    function checkin(bid) { }
+
     // Main Window Components
     TabView {
         id: mainView
@@ -42,7 +48,7 @@ ApplicationWindow {
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
-        Tab { title: "The Pub"; ThepubLocal {} }
+        Tab { title: "Near-By"; ThepubLocal {} }
     }
 
 }

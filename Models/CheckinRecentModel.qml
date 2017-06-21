@@ -8,4 +8,5 @@ AbstractCheckinsModel {
     // limit (int, optional) - The number of results to return, max of 50, default is 25
 
     Component.onCompleted: load()
+
 }

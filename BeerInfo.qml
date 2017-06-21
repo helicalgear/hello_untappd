@@ -16,7 +16,7 @@ ApplicationWindow {
         bid: beerId
     }
 
-    ThepubLocalModel {
+    VenueListModel {
         id: thepubLocal
     }
 
@@ -32,19 +32,17 @@ ApplicationWindow {
 
     PositionSource {
         id: posSource
-        updateInterval: 10000
+        updateInterval: 30000
         active: true
-//        preferredPositioningMethods: PositionSource.NonSatellitePositioningMethods
+        preferredPositioningMethods: PositionSource.NonSatellitePositioningMethods
 
         onPositionChanged: {
-            var radius = Math.round(posSource.position.horizontalAccuracy / 1000)
+            var radius = Math.ceil(posSource.position.horizontalAccuracy / 1000)
             if (radius <= 0 || radius >= 25) { radius = 25 }
             thepubLocal.lat = posSource.position.coordinate.latitude
             thepubLocal.lng = posSource.position.coordinate.longitude
-            thepubLocal.radius = radius
+            thepubLocal.radius = 25 // radius
             thepubLocal.load()
-            console.log(thepubLocal.lat)
-            console.log(thepubLocal.lng)
         }
     }
 
@@ -188,7 +186,7 @@ ApplicationWindow {
             spacing: 10
             Button {
                 text: "Twitter"
-                enabled: settings.readData("twitter", "") !== ""
+                enabled: settings.readData("twitter", false)
                 onClicked: {
                     switch (checkInParam.twitter) {
                     case "on":
@@ -204,7 +202,7 @@ ApplicationWindow {
             }
             Button {
                 text: "Facebook"
-                enabled: settings.readData("facebook", "") !== ""
+                enabled: settings.readData("facebook", false)
                 onClicked: {
                     switch (checkInParam.facebook) {
                     case "on":
@@ -219,15 +217,16 @@ ApplicationWindow {
                 }
             }
             Button {
+                id: foursquare
                 text: "Foursquare"
-                enabled: settings.readData("foursquare", "") !== "" && checkInParam.foursquare_id !== ""
+                enabled: settings.readData("foursquare", false) && checkInParam.foursquare_id !== ""
                 onClicked: {
-                    switch (checkInParam.facebook) {
+                    switch (checkInParam.foursquare) {
                     case "on":
-                        checkInParam.facebook = "off";
+                        checkInParam.foursquare = "off";
                         break;
                     case "off":
-                        checkInParam.facebook = "on";
+                        checkInParam.foursquare = "on";
                         break;
                     default:
                         break;
@@ -238,6 +237,17 @@ ApplicationWindow {
                 text: "Checin In!"
                 onClicked: Untappd.postCheckinAdd(checkInParam)
             }
+            Button {
+                id: venue
+                text: "Not Selected"
+                onClicked: {
+                    venue.text = "Not Selected"
+                    checkInParam.foursquare_id = "";
+                    checkInParam.geolat = 0.0;
+                    checkInParam.geolng = 0.0;
+                    checkInParam.foursquare = "off";
+                }
+            }
         }
 
         ListView {
@@ -245,7 +255,17 @@ ApplicationWindow {
             height: width * 0.25
             model: thepubLocal
             delegate: Text {
-                text: thepubLocal.venue.venue_name
+                text: venue_name
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        venue.text = parent.text;
+                        checkInParam.foursquare_id = foursquare.foursquare_id;
+                        checkInParam.geolat = location.lat;
+                        checkInParam.geolng = location.lng;
+                        checkInParam.foursquare = "on";
+                    }
+                }
             }
         }
 

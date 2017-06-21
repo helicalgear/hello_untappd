@@ -29,5 +29,7 @@
         <file>Models/UserInfoModel.qml</file>
         <file>Views/CheckinsListView.qml</file>
         <file>SearchBrewery.qml</file>
+        <file>Models/VenueListModel.qml</file>
+        <file>Delegates/CheckinItem.qml</file>
     </qresource>
 </RCC>

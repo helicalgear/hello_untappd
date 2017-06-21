@@ -1,10 +1,9 @@
 import QtQuick 2.0
 import "../Utils/UntappdAPI.js" as Untappd
 
-Item {
+QtObject {
     //
     property bool loading: false
-    property bool complete: false
     property string endpoint: ""
     property string parameters: compact ? "compact=true&" : ""
     property string target: ""
@@ -14,11 +13,13 @@ Item {
 
     function load() {
         loading = true;
-        Untappd.accessAPI( function(jsn) {
-            info = jsn[target];
+        Untappd.accessAPI( function(result, response, notifications) {
+            if ( result ) {
+                info = response[target];
+            } else {
+                console.log("%1: %2".arg(response.code).arg(response.error_detail));
+            }
             loading = false;
-            complete = true;
-        }, "GET", endpoint, parameters)
+        }, "GET", endpoint, parameters);
     }
-
 }

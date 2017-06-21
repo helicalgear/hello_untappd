@@ -16,5 +16,6 @@ AbstractInfoModel {
                                                   "twitter": "",
                                                   "facebook": "" }
 
-    onEndpointChanged: load()
+    onEndpointChanged: if ( user_name !=="" ) load()
+
 }

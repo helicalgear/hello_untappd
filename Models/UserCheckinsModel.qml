@@ -9,4 +9,6 @@ AbstractCheckinsModel {
     // limit (int, optional) - The number of results to return, max of 50, default is 25
     property string user_name: ""
 
+    onEndpointChanged: if ( user_name !== "" ) load()
+
 }
