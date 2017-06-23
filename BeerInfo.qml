@@ -10,6 +10,7 @@ ApplicationWindow {
     height: 360
 
     property string beerId
+    property var localTime: new Date()
 
     BeerInfoModel {
         id: beerInfo
@@ -20,7 +21,9 @@ ApplicationWindow {
         id: thepubLocal
     }
 
-    property var checkInParam: { "bid": beerId,
+    property var checkInParam: { "gmt_offset": tzOffset,
+                                 "timezone": timeZone,
+                                 "bid": beerId,
                                  "foursquare_id": "",
                                  "geolat": 0,
                                  "geolng": 0,
@@ -270,5 +273,7 @@ ApplicationWindow {
         }
 
     }
+
+    Component.onCompleted: console.log("%1, %2".arg(checkInParam.gmt_offset).arg(checkInParam.timezone))
 
 }

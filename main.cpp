@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("clientSecret", SECRET);
     engine.rootContext()->setContextProperty("redirectUrl", URL);
     engine.rootContext()->setContextProperty("timeZone", local.timeZoneAbbreviation());
-    engine.rootContext()->setContextProperty("tzOffset", local.offsetFromUtc());
+    engine.rootContext()->setContextProperty("tzOffset", local.offsetFromUtc()/3600);
     if ( ms.measurementSystem() == 0 ) {
         engine.rootContext()->setContextProperty("distPref", "km");
     } else {

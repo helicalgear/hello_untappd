@@ -184,7 +184,7 @@ function getSearchBrewery(callback, query) {
 
 // _Actions_
 // Checkin
-function postCheckinAdd(param) {
+function postCheckinAdd(callback, param) {
     var parameter_list = [];
     for (var key in param) {
         if (!(param[key] === "" || param[key] === 0 || param[key] === "off")) {
@@ -192,7 +192,13 @@ function postCheckinAdd(param) {
         }
     }
     var parameters = parameter_list.join('&');
-    accessAPI(function(result, response, notifications) {}, "POST", "checkin/add", parameters);
+    accessAPI(function(result, response, notifications) {
+        if ( result ) {
+            callback( 0, response);
+        } else {
+            callback( -1, response );
+        }
+    }, "POST", "checkin/add", parameters);
 }
 
 // Toast / Untoast
@@ -306,9 +312,9 @@ function getAccessToken(code) {
                 settings.saveData('AccessToken', jsn.response.access_token);
                 accessAPI(function(result, response, notifications) {
                     settings.saveData("user_name", response.user.user_name);
-                    settings.saveData("twitter", defined(response.user.contact.twitter));
-                    settings.saveData("foursquare", defined(response.user.contact.foursquare));
-                    settings.saveData("facebook", defined(response.user.contact.facebook));
+                    settings.saveData("twitter", (response.user.contact.twitter !== ""));
+                    settings.saveData("foursquare", (response.user.contact.foursquare !== ""));
+                    settings.saveData("facebook", (response.user.contact.facebook !== ""));
                 }, "GET", "user/info/", "");
                 break;
             case 401:

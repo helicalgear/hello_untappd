@@ -12,6 +12,8 @@ Item {
     ThepubLocalModel { id: thepubLocal }
 
     ListView {
+        id: root
+
         anchors.fill: parent
 
         model: thepubLocal
@@ -19,6 +21,7 @@ Item {
         delegate: CheckinItem {
             id: checkinItem
         }
+
     }
 
     Component.onCompleted: {

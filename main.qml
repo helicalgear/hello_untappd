@@ -37,9 +37,6 @@ ApplicationWindow {
     //　Common Functions
     function defined(obj) { return typeof obj !== 'undefined' }
 
-    //
-    function checkin(bid) { }
-
     // Main Window Components
     TabView {
         id: mainView
