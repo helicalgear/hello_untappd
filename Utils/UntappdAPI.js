@@ -312,9 +312,12 @@ function getAccessToken(code) {
                 settings.saveData('AccessToken', jsn.response.access_token);
                 accessAPI(function(result, response, notifications) {
                     settings.saveData("user_name", response.user.user_name);
-                    settings.saveData("twitter", (response.user.contact.twitter !== ""));
-                    settings.saveData("foursquare", (response.user.contact.foursquare !== ""));
-                    settings.saveData("facebook", (response.user.contact.facebook !== ""));
+                    settings.saveData("twitter", response.user.contact.twitter);
+                    settings.saveData("foursquare", response.user.contact.foursquare);
+                    settings.saveData("facebook", response.user.contact.facebook);
+                    console.log(response.user.contact.twitter);
+                    console.log(response.user.contact.foursquare);
+                    console.log(response.user.contact.facebook);
                 }, "GET", "user/info/", "");
                 break;
             case 401:

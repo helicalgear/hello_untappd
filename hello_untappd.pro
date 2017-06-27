@@ -19,7 +19,10 @@ QML_DESIGNER_IMPORT_PATH =
 DEFINES += QT_DEPRECATED_WARNINGS \
            ID=\\\"$$_ID\\\" \
            SECRET=\\\"$$_SECRET\\\" \
-           URL=\\\"$$_URL\\\"
+           URL=\\\"$$_URL\\\" \
+           FS_ID=\\\"$$_FS_ID\\\" \
+           FS_SECRET=\\\"$$_FS_SECRET\\\" \
+           FS_VERSION=\\\"$$_FS_VERSION\\\"
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.

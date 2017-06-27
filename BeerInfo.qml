@@ -22,7 +22,7 @@ ApplicationWindow {
     }
 
     property var checkInParam: { "gmt_offset": tzOffset,
-                                 "timezone": timeZone,
+                                 "timezone": "JST",
                                  "bid": beerId,
                                  "foursquare_id": "",
                                  "geolat": 0,
@@ -44,9 +44,18 @@ ApplicationWindow {
             if (radius <= 0 || radius >= 25) { radius = 25 }
             thepubLocal.lat = posSource.position.coordinate.latitude
             thepubLocal.lng = posSource.position.coordinate.longitude
-            thepubLocal.radius = 25 // radius
-            thepubLocal.load()
+            thepubLocal.radius = radius * 1000
         }
+    }
+
+    Timer {
+        id: thepubLocal_queryInput
+        interval: 1000
+        repeat: false
+        onTriggered: if ( venue_name.text !== "" ) {
+                         thepubLocal.query = venue_name.text
+                         thepubLocal.load()
+                     }
     }
 
     Column {
@@ -189,7 +198,7 @@ ApplicationWindow {
             spacing: 10
             Button {
                 text: "Twitter"
-                enabled: settings.readData("twitter", false)
+                enabled: settings.readData("twitter", "undefined") !== "undefined"
                 onClicked: {
                     switch (checkInParam.twitter) {
                     case "on":
@@ -205,7 +214,7 @@ ApplicationWindow {
             }
             Button {
                 text: "Facebook"
-                enabled: settings.readData("facebook", false)
+                enabled: settings.readData("facebook", "undefined") !== "undefined"
                 onClicked: {
                     switch (checkInParam.facebook) {
                     case "on":
@@ -222,7 +231,7 @@ ApplicationWindow {
             Button {
                 id: foursquare
                 text: "Foursquare"
-                enabled: settings.readData("foursquare", false) && checkInParam.foursquare_id !== ""
+                enabled: settings.readData("foursquare", "undefined") !== "undefined" && checkInParam.foursquare_id !== ""
                 onClicked: {
                     switch (checkInParam.foursquare) {
                     case "on":
@@ -238,7 +247,7 @@ ApplicationWindow {
             }
             Button {
                 text: "Checin In!"
-                onClicked: Untappd.postCheckinAdd(checkInParam)
+                onClicked: Untappd.postCheckinAdd(function(result, response) {console.log("Check In")}, checkInParam)
             }
             Button {
                 id: venue
@@ -249,7 +258,21 @@ ApplicationWindow {
                     checkInParam.geolat = 0.0;
                     checkInParam.geolng = 0.0;
                     checkInParam.foursquare = "off";
+                    foursquare.enabled = false
                 }
+            }
+        }
+
+        Rectangle {
+            width: parent.width
+            height: venue_name.contentHeight + 20
+            border.width: 1
+            radius: 10
+            TextInput {
+                id: venue_name
+                width: parent.width - 40
+                anchors.centerIn: parent
+                onTextChanged: thepubLocal_queryInput.restart()
             }
         }
 
@@ -258,15 +281,16 @@ ApplicationWindow {
             height: width * 0.25
             model: thepubLocal
             delegate: Text {
-                text: venue_name
+                text: name
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         venue.text = parent.text;
-                        checkInParam.foursquare_id = foursquare.foursquare_id;
+                        checkInParam.foursquare_id = id;
                         checkInParam.geolat = location.lat;
                         checkInParam.geolng = location.lng;
                         checkInParam.foursquare = "on";
+                        foursquare.enabled = settings.readData("foursquare", "undefined") !== "undefined"
                     }
                 }
             }
@@ -274,6 +298,8 @@ ApplicationWindow {
 
     }
 
-    Component.onCompleted: console.log("%1, %2".arg(checkInParam.gmt_offset).arg(checkInParam.timezone))
+    Component.onCompleted: {
+        console.log("%1, %2".arg(checkInParam.gmt_offset).arg(checkInParam.timezone))
+    }
 
 }

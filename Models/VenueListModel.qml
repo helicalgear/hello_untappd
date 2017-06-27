@@ -1,48 +1,26 @@
 import QtQuick 2.0
-import "../Utils/UntappdAPI.js" as Untappd
+import "../Utils/FoursquareAPI.js" as Foursquare
 
 ThepubLocalModel {
+    endpoint: "venues/search"
+    parameters: "ll=%1,%2&radius=%3&query=%4".arg(lat).arg(lng).arg(radius).arg(query)
+    property string query: ""
 
     function load() {
         loading = true;
         clear();
-        Untappd.accessAPI( function(resp, jsn) {
-            if ( resp ) {
-                var venue_list = [];
-                var items = jsn.checkins.items;
-                for (var n=0; n<jsn.checkins.count; n++) {
-                    max_id = items[n].checkin_id;
-                    if (Object.keys(items[n].venue).length === 0) { items[n].venue = {}; }
-                    if (venue_list.indexOf(items[n].venue.venue_id) === -1) {
-                        venue_list.push(items[n].venue.venue_id);
-                        append(items[n].venue);
-                    }
+        Foursquare.accessAPI( function(result, response, notifications) {
+            if ( result ) {
+                var items = response.venues;
+                var count = Object.keys(response.venues).length;
+                for (var n=0; n<count; n++) {
+                    append(items[n]);
                 }
             } else {
-                console.log ("%1: %2".arg(jsn.code).arg(jsn.error_detail));
+                console.log ("%1: %2".arg(response.code).arg(response.error_detail));
             }
             loading = false;
         }, "GET", endpoint, parameters);
     }
 
-    function reload() {
-        loading = true;
-        Untappd.accessAPI( function(resp, jsn) {
-            if ( resp ) {
-                var venue_list = [];
-                var items = jsn.checkins.items;
-                for (var n=0; n<jsn.checkins.count; n++) {
-                    max_id = items[n].checkin_id;
-                    if (Object.keys(items[n].venue).length === 0) { items[n].venue = {}; }
-                    if (venue_list.indexOf(items[n].venue.venue_id) === -1) {
-                        venue_list.push(items[n].venue.venue_id);
-                        append(items[n].venue);
-                    }
-                }
-            } else {
-                console.log ("%1: %2".arg(jsn.code).arg(jsn.error_detail));
-            }
-            loading = false;
-        }, "GET", endpoint, "%1&max_id=%2".arg(parameters).arg(max_id));
-    }
 }

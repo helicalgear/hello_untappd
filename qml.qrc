@@ -31,5 +31,6 @@
         <file>SearchBrewery.qml</file>
         <file>Models/VenueListModel.qml</file>
         <file>Delegates/CheckinItem.qml</file>
+        <file>Utils/FoursquareAPI.js</file>
     </qresource>
 </RCC>
