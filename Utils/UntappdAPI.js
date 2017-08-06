@@ -75,7 +75,7 @@ function getBreweryCheckins(callback, brewery_id) {
     }, "GET", "brewery/checkins/%1".arg(brewery_id), "");
 }
 
-//Notifications
+// Notifications
 function getNotifications(callback, sw) {
     accessAPI(function(result, response, notifications) {
         if (result) {
@@ -84,6 +84,17 @@ function getNotifications(callback, sw) {
             callback( -1, response );
         }
     }, "GET", "notifications", "");
+}
+
+// Beer Trending
+function getBeerTrending(callback) {
+    accessAPI(function(result, response, notifications) {
+        if (result) {
+            callback( response.count, response.items );
+        } else {
+            callback( -1, response );
+        }
+    }, "GET", "beer/trending", "");
 }
 
 // _Info_
@@ -157,6 +168,13 @@ function getVenueInfo(callback, venue_id) {
     accessAPI(function(result, response, notifications) {
         callback(response.venue);
     }, "GET", "brewery/info/%1".arg(venue_id), "");
+}
+
+// Checkin View
+function getCheckinView(callback, checkin_id) {
+    accessAPI(function(result, response, notifications) {
+        callback(response.checkin);
+    }, "GET", "checkin/view/%1".arg(checkin_id), "");
 }
 
 // _Search_
