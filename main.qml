@@ -1,4 +1,4 @@
-import QtQuick 2.7
+import QtQuick 2.12
 import QtQuick.Controls 1.4
 import "./Utils/UntappdAPI.js" as Untappd
 
@@ -41,7 +41,10 @@ ApplicationWindow {
     TabView {
         id: mainView
         anchors.fill: parent
-        Tab { title: "Search Beer" ; SearchBeer {} }
+        Tab {
+            title: "Search Beer"
+            SearchBeer {}
+        }
         Tab { title: "User Info" ; UserInfo {} }
         Tab { title: "Activity Feed" ; Activity {} }
         Tab { title: "User Activity Feed" ; UserActivity {} }
